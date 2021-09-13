@@ -136,13 +136,7 @@ E-mail: chuan.pham@etsmtl.ca
 
 <br/>
 
-<br/>
 
-<br/>
-
-<br/>
-
-<br/>
 
 ### Self-Optimization Fabric (SOF) for ENCQOR Network
 
