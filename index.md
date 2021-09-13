@@ -1,4 +1,4 @@
-## Chuan Pham
+## About me...
 
 <img align="left" src="/figs/pchuan.jpg" alt="drawing" width="150"/>
 
@@ -146,9 +146,10 @@ E-mail: chuan.pham@etsmtl.ca
 
 ### Self-Optimization Fabric (SOF) for ENCQOR Network
 
-**Objective:** focusing on non-RT RIC is to support non-real-time intelligent radio resource management, providing AI/ML models to near-RT RIC and other RAN functions.
+**Objective:** focusing on non-RT RIC is to support non-real-time intelligent radio resource management, providing AI/ML models to near-RT RIC and other **O-RAN** functions.
 
 **Collaboration: CIENA**
+
 <img align="left" src="/figs/encqor.jpg" alt="drawing" />
 
 ------------
