@@ -90,6 +90,7 @@ E-mail: chuan.pham@etsmtl.ca
 
 ## Projects
 ### Sustainable Cloud-based M2M Smart Home
+
 <img align="left" src="/figs/drawing.preview.png" alt="drawing" width="300"/>
 
 
@@ -117,6 +118,7 @@ E-mail: chuan.pham@etsmtl.ca
 ### IoT 
 
 **Objective: investigating and developing new solutions for IoT network**
+
 <img align="left" src="/figs/iot.png" alt="drawing" />
 
 <br/>
@@ -143,7 +145,9 @@ E-mail: chuan.pham@etsmtl.ca
 <br/>
 
 ### Self-Optimization Fabric (SOF) for ENCQOR Network
+
 **Objective:** focusing on non-RT RIC is to support non-real-time intelligent radio resource management, providing AI/ML models to near-RT RIC and other RAN functions.
+
 **Collaboration: CIENA**
 <img align="left" src="/figs/encqor.jpg" alt="drawing" />
 
@@ -158,4 +162,5 @@ E-mail: chuan.pham@etsmtl.ca
 
 
 ## Timeline 
+
 <img align="left" src="/figs/timeline.png" alt="drawing" />
