@@ -76,7 +76,7 @@ E-mail: chuan.pham@etsmtl.ca
 
 - Nguyen H. Tran, Chuan Pham, Shaolei Ren, and Choong Seon Hong, ‘‘Coordinated Energy Management for Emergency Demand Response in Mixed-Use Buildings,’’ IEEE ICUWB Workshop on Next Generation of Green ICT and 5G Networking (GreeNets), Invited paper, Montreal, Canada, Nov. 2015
 
-**Cloud and Mobile-Edge Computing
+**Cloud and Mobile-Edge Computing**
 
 - Minh N. H. Nguyen, Nguyen H. Tran, Mohammad A. Islam, Chuan Pham, Shaolei Ren, Choong Seon Hong, "Fair Sharing of Backup Power Supply in Multi-Operator Wireless Cellular Towers", Transactions on Wireless Communications, 2017, (in press)
 
