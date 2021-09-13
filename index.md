@@ -1,6 +1,6 @@
 ## Chuan Pham
 
-<img align="left" src="/figs/Digital photo_PHAM CHUAN.jpg" alt="drawing" width="150"/>
+<img align="left" src="/figs/pchuan.jpg" alt="drawing" width="150"/>
 
 **Research Associate,** 
 
