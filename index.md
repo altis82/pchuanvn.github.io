@@ -9,11 +9,10 @@ Synchromedia Laboratory, École de technologie supérieure (ETS), Université du
 **Contact**
 
 1100, Notre-Dame Street West Montreal, QC H3C 1K3 Canada.\
-Office : A-3400.\  
-Skype: pchuanvn\
-Tel:+1 514.6381210
-
-E-mail: chuan.pham@etsmtl.ca
+Office : A-3400.\
+*Skype*: pchuanvn.\
+*Tel*:+1 514.6381210
+*E-mail*: chuan.pham@etsmtl.ca
 
 ### New
 
