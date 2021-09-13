@@ -132,9 +132,7 @@ E-mail: chuan.pham@etsmtl.ca
 
 <br/>
 
-<br/>
 
-<br/>
 
 
 
