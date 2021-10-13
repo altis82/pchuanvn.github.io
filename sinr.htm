@@ -172,7 +172,15 @@
     </code></pre>
     <p><a href="https://i.stack.imgur.com/mbwvd.png" rel="noreferrer"><img src="https://i.stack.imgur.com/mbwvd.png" alt="Signal with target noise level" /></a></p>
     <p><img src="https://engineerstutor.com/wp-content/uploads/2018/08/5-2.jpg" alt="Shanon channel capacity theorem" /></p>
-      </div>
+    <h3>Calculate the distance based on signal strength:</h3>
+    <p></p>
+    <p>The formula used is:</p>
+    <blockquote>
+    <p>distance = 10 ^ ((27.55 - (20 * log10(frequency)) + signalLevel)/20)</p>
+    </blockquote>
+    <p>Example: frequency = 2412MHz, signalLevel = -57dbm, result = 7.000397427391188m</p>
+    <p>This formula is transformed form of<span>&nbsp;</span><a href="http://en.wikipedia.org/wiki/Free-space_path_loss" rel="noreferrer">Free Space Path Loss(FSPL)</a><span>&nbsp;</span>formula. Here the distance is measured in meters and the frequency - in megahertz. For other measures you have to use different constant (27.55). Read for the constants<span>&nbsp;</span><a href="http://en.wikipedia.org/wiki/Free-space_path_loss#Free-space_path_loss_in_decibels" rel="noreferrer">here</a>.</p>  
+  </div>
       
     </div>
     <div id="footer">
