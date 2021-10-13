@@ -67,9 +67,110 @@
         <p>While noise can come in different<span>&nbsp;</span>flavors<span>&nbsp;</span>depending on what you are modeling, a good start (especially for this radio telescope example) is<span>&nbsp;</span><a href="https://en.wikipedia.org/wiki/Additive_white_Gaussian_noise" rel="noreferrer">Additive White Gaussian Noise (AWGN)</a>. As stated in the previous answers, to model AWGN you need to add a zero-mean Gaussian random variable to your original signal. The variance of that random variable will affect the<span>&nbsp;</span><em>average</em><span>&nbsp;</span>noise power.</p>
         <p>For a Gaussian random variable X, the average power<span>&nbsp;</span><img src="https://chart.googleapis.com/chart?cht=tx&amp;chl=E%5BX%5E2%5D" alt="Ep" />, also known as the second<span>&nbsp;</span>moment, is<br />[3]<span>&nbsp;</span><img src="https://chart.googleapis.com/chart?cht=tx&amp;chl=E%5BX%5E2%5D%3D%5Cmu%5E2%2B%5Csigma%5E2" alt="Ex" /></p>
         <p>So for white noise,<span>&nbsp;</span><img src="https://chart.googleapis.com/chart?cht=tx&amp;chl=%5Cmu=0" alt="Ex" /><span>&nbsp;</span>and the average power is then equal to the variance<span>&nbsp;</span><img src="https://chart.googleapis.com/chart?cht=tx&amp;chl=%5Csigma%5E2" alt="Ex" />.</p>
-        <p>When modeling this in python, you can either<br />1. Calculate variance based on the desired SNR and a set of existing measurements, which would work if you expect your measurements to have fairly consistent amplitude values.<br />2. Alternatively, you could set noise power to a known level to match something like receiver noise. Receiver noise could be measured by pointing the telescope into free space and calculating average power.</p>
-        <p>Either way, it's important to make sure that you add noise to your signal and take averages in the linear space and not in dB units.</p>
-        <p>Here's some code to generate a signal and plot voltage, power in Watts, and power in dB:</p>
+        <p>When modeling this in python, you can either<br />1. Calculate variance based on the desired SNR and a set of existing measurements.<br />2. Alternatively, we could set noise power to a known level to match something like receiver noise.</p>
+<p>It's important to make sure that you add noise to the signal and take averages in the linear space and not in dB units.</p>
+<p>Here's some code to generate a signal and plot voltage, power in Watts, and power in dB:</p>
+<pre class="lang-py s-code-block"><code class="hljs language-python"><span class="hljs-comment"># Signal Generation</span>
+    <span class="hljs-comment"># matplotlib inline</span>
+    
+    <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+    <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+    
+    t = np.linspace(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>)
+    x_volts = <span class="hljs-number">10</span>*np.sin(t/(<span class="hljs-number">2</span>*np.pi))
+    plt.subplot(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)
+    plt.plot(t, x_volts)
+    plt.title(<span class="hljs-string">'Signal'</span>)
+    plt.ylabel(<span class="hljs-string">'Voltage (V)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    
+    x_watts = x_volts ** <span class="hljs-number">2</span>
+    plt.subplot(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)
+    plt.plot(t, x_watts)
+    plt.title(<span class="hljs-string">'Signal Power'</span>)
+    plt.ylabel(<span class="hljs-string">'Power (W)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    
+    x_db = <span class="hljs-number">10</span> * np.log10(x_watts)
+    plt.subplot(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)
+    plt.plot(t, x_db)
+    plt.title(<span class="hljs-string">'Signal Power in dB'</span>)
+    plt.ylabel(<span class="hljs-string">'Power (dB)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    </code></pre>
+    <p><a href="https://i.stack.imgur.com/8UNws.png" rel="noreferrer"><img src="https://i.stack.imgur.com/8UNws.png" alt="Generated Signal" /></a></p>
+    <p>Here's an example for adding AWGN based on a desired SNR:</p>
+    <pre class="lang-py s-code-block"><code class="hljs language-python"><span class="hljs-comment"># Adding noise using target SNR</span>
+    
+    <span class="hljs-comment"># Set a target SNR</span>
+    target_snr_db = <span class="hljs-number">20</span>
+    <span class="hljs-comment"># Calculate signal power and convert to dB </span>
+    sig_avg_watts = np.mean(x_watts)
+    sig_avg_db = <span class="hljs-number">10</span> * np.log10(sig_avg_watts)
+    <span class="hljs-comment"># Calculate noise according to [2] then convert to watts</span>
+    noise_avg_db = sig_avg_db - target_snr_db
+    noise_avg_watts = <span class="hljs-number">10</span> ** (noise_avg_db / <span class="hljs-number">10</span>)
+    <span class="hljs-comment"># Generate an sample of white noise</span>
+    mean_noise = <span class="hljs-number">0</span>
+    noise_volts = np.random.normal(mean_noise, np.sqrt(noise_avg_watts), <span class="hljs-built_in">len</span>(x_watts))
+    <span class="hljs-comment"># Noise up the original signal</span>
+    y_volts = x_volts + noise_volts
+    
+    <span class="hljs-comment"># Plot signal with noise</span>
+    plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)
+    plt.plot(t, y_volts)
+    plt.title(<span class="hljs-string">'Signal with noise'</span>)
+    plt.ylabel(<span class="hljs-string">'Voltage (V)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    <span class="hljs-comment"># Plot in dB</span>
+    y_watts = y_volts ** <span class="hljs-number">2</span>
+    y_db = <span class="hljs-number">10</span> * np.log10(y_watts)
+    plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)
+    plt.plot(t, <span class="hljs-number">10</span>* np.log10(y_volts**<span class="hljs-number">2</span>))
+    plt.title(<span class="hljs-string">'Signal with noise (dB)'</span>)
+    plt.ylabel(<span class="hljs-string">'Power (dB)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    </code></pre>
+    <p><a href="https://i.stack.imgur.com/82NT4.png" rel="noreferrer"><img src="https://i.stack.imgur.com/82NT4.png" alt="Signal with target SNR" /></a></p>
+    <p>And here's an example for adding AWGN based on a known noise power:</p>
+    <pre class="lang-py s-code-block"><code class="hljs language-python"><span class="hljs-comment"># Adding noise using a target noise power</span>
+    
+    <span class="hljs-comment"># Set a target channel noise power to something very noisy</span>
+    target_noise_db = <span class="hljs-number">10</span>
+    
+    <span class="hljs-comment"># Convert to linear Watt units</span>
+    target_noise_watts = <span class="hljs-number">10</span> ** (target_noise_db / <span class="hljs-number">10</span>)
+    
+    <span class="hljs-comment"># Generate noise samples</span>
+    mean_noise = <span class="hljs-number">0</span>
+    noise_volts = np.random.normal(mean_noise, np.sqrt(target_noise_watts), <span class="hljs-built_in">len</span>(x_watts))
+    
+    <span class="hljs-comment"># Noise up the original signal (again) and plot</span>
+    y_volts = x_volts + noise_volts
+    
+    <span class="hljs-comment"># Plot signal with noise</span>
+    plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)
+    plt.plot(t, y_volts)
+    plt.title(<span class="hljs-string">'Signal with noise'</span>)
+    plt.ylabel(<span class="hljs-string">'Voltage (V)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    <span class="hljs-comment"># Plot in dB</span>
+    y_watts = y_volts ** <span class="hljs-number">2</span>
+    y_db = <span class="hljs-number">10</span> * np.log10(y_watts)
+    plt.subplot(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)
+    plt.plot(t, <span class="hljs-number">10</span>* np.log10(y_volts**<span class="hljs-number">2</span>))
+    plt.title(<span class="hljs-string">'Signal with noise'</span>)
+    plt.ylabel(<span class="hljs-string">'Power (dB)'</span>)
+    plt.xlabel(<span class="hljs-string">'Time (s)'</span>)
+    plt.show()
+    </code></pre>
+    <p><a href="https://i.stack.imgur.com/mbwvd.png" rel="noreferrer"><img src="https://i.stack.imgur.com/mbwvd.png" alt="Signal with target noise level" /></a></p>
       </div>
       
     </div>
