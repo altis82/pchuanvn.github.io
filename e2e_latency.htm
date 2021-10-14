@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>CHUAN PHAM</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Chuan Pham<span class="logo_colour">'s Page</span></a></h1>
+          <h2>“Be still like a mountain and flow like a great river.”
+            ― Lao Tzu</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li class="selected"><a href="index.htm">Home</a></li>
+          <li><a href="#">Publication</a></li>
+          <li><a href="tech.htm">Technical blog</a></li>
+          <li><a href="project.htm">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+        <h3>Latest News</h3>
+
+        <!-- <h4>New Website Launched</h4>
+        <h5>January 1st, 2014</h5>
+        <p>2014 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
+        <p></p>
+        <h4>New Website Launched</h4>
+        <h5>January 1st, 2014</h5>
+        <p>2014 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
+        <h3>Useful Links</h3> -->
+
+        <ul>
+          <li>Chuan Pham,  Njah, et al. "Share to Run IoT Services in Edge Cloud Computing",   IEEE Internet of Things Journal, 2021 (Accepted).</li>
+          <li>Chuan Pham, et al. "Optimized IoT service chain implementation in edge cloud platform: A deep learning framework", IEEE Trans. TNSM, 2021 (Accepted).</li>          
+        </ul>
+        <h3>Search</h3>
+        <form method="post" action="#" id="search_form">
+          <p>
+            <input class="search" type="text" name="search_field" value="Enter keywords....." />
+            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
+          </p>
+        </form>
+      </div>
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>Understanding - and Reducing - Latency in Video Compression Systems</h1>
+<p></p>
+<p><em>By CAST, Inc.</em></p>
+<p>In the video world,<span>&nbsp;</span><em>latency</em><span>&nbsp;</span>is the amount of time between the instant a frame is captured and the instant that frame is displayed.<span>&nbsp;</span><em>Low latency</em><span>&nbsp;</span>is a design goal for any system where there is real-time interaction with the video content, such as video conferencing or drone piloting.</p>
+<p>But the meaning of &ldquo;low latency&rdquo; can vary, and the methods for achieving low latency aren&rsquo;t always obvious.</p>
+<p>Here we&rsquo;ll define and explain the basics of video latency, and discuss how one of the biggest impacts in reducing latency comes from choosing the right video encoding.</p>
+<p><strong>Characterizing Video System Latency</strong></p>
+<p>There are several stages of processing required to make the pixels captured by a camera visible on a video display. The delays contributed by each of these processing steps&mdash;as well as the time required for transmitting the compressed video stream&mdash;together produce the total delay, which is sometimes called<span>&nbsp;</span><em>end-to-end latency</em>.</p>
+<p><strong>Measuring Video Latency</strong></p>
+<p>Latency is colloquially expressed in time units, e.g., seconds or milliseconds (ms).</p>
+<p>But the biggest contributors to video latency are the processing stages that require temporal storage of data, i.e., short-term<span>&nbsp;</span><em>buffering</em><span>&nbsp;</span>in some form of memory. Because of this, video system engineers tend to measure latency in terms of the buffered video data, for example, a latency of two frames or eight horizontal lines.</p>
+<p>Converting from frames to time depends on the video&rsquo;s frame rate. For example, a delay of one frame in 30 frames-per-second (fps) video corresponds to 1/30<sup>th</sup><span>&nbsp;</span>of a second (33.3ms) of latency.</p>
+<p><img alt="Diagram showing an example of video latency, the
+ delay between capture by a camera and display on a monitor" src="https://www.design-reuse.com/news_img/20131007_video-latency-example-fig1-ck.png" width="480" longdesc="https://www.design-reuse.com/news_img/20131007_video-latency-example-fig1-ck.png" class="" /></p>
+<p>Figure 1: Representing latency in a 1080p30 video stream.</p>
+<p>Converting from video lines to time requires both the frame rate and the frame size or resolution. A 720p HD video frame has 720 horizontal lines, so a latency of one line at 30fps is 1/(30*720) = 0.046ms of latency. In 1080p @ 30fps, that same one-line latency takes a much briefer 0.030ms.</p>
+<p><strong>Defining &ldquo;Low Latency&rdquo;</strong></p>
+<p>There is no universal absolute value that defines<span>&nbsp;</span><em>low latency</em>. Instead, what is considered acceptable low latency varies by application.</p>
+<p>When humans interact with video in a live video conference or when playing a game, latency lower than 100ms is considered to be low, because most humans don&rsquo;t perceive a delay that small. But in an application where a machine interacts with video&mdash;as is common in many automotive, industrial, and medical systems&mdash;then latency requirements can be much lower: 30ms, 10ms, or even under a millisecond, depending on the requirements of the system.</p>
+<p>You will also see the term<span>&nbsp;</span><em>ultra-low latency</em><span>&nbsp;</span>applied to video processing functions and IP cores. This is a marketing description not a technical definition, and yes, it just means &ldquo;really, really low latency&rdquo; for the given application.</p>
+<p><strong>Designing for Low Latency In A Video Streaming Application</strong></p>
+<p>Because it is commonplace in today&rsquo;s connected, visual world, let&rsquo;s examine latency in systems that stream video from a camera (or server) to a display over a network.</p>
+<p>As with most system design goals, achieving suitably low latency for a streaming system requires tradeoffs, and success comes in achieving the optimum balance of hardware, processing speed, transmission speed, and video quality. As previously mentioned, any temporary storage of video data (uncompressed or compressed) increases latency, so reducing buffering is a good primary goal.</p>
+<p>Video data buffering is imposed whenever processing must wait until some specific amount of data is available. The amount of data buffering required can vary from a few pixels, to several video lines, or even to a number of whole frames. With a target maximum acceptable latency in mind, we can easily calculate the amount of data buffering the system can tolerate, and hence to what level&mdash;pixel, line, or frame&mdash;one should focus on when budgeting and optimizing for latency.</p>
+<p>For example, with our human viewer&rsquo;s requirement of 100ms maximum latency for a streaming system using 1080p30 video, we can calculate the maximum allowable buffering through the processing pipeline as follows:</p>
+<p>100ms/(33.3ms per frame) = 3 frames, or<br />1080 lines per frame x 3 frames =3240 lines, or<br />1920 pixels per line x 3240 lines = 6.2 million pixels</p>
+<p>In this context, we can see that worrying about the latency of a hardware JPEG encoder&mdash;typically just a few thousand pixels&mdash;is irrelevant, because it&rsquo;s too small to make any significant difference in end-to-end latency. Instead, one should focus on the points of the system where entire frames or large number of video lines are buffered.</p>
+<p>Representative results from such a focused design effort are itemized in Table 1, which provides the distribution of latency from the various stages of a carefully designed &ldquo;low-latency&rdquo; video-streaming system. Here all unnecessary frame-level buffering has been eliminated, and hardware codecs have been used throughout (because software codecs typically feature higher latencies due to latency overheads related to memory transfers and task-level management from the OS).</p>
+<table><caption>
+<p><em>Table 1. Contributions to delay in a low-latency, 1080p30 video streaming system.</em></p>
+</caption>
+<tbody>
+<tr>
+<td><strong>Processing Stage</strong></td>
+<td><strong>Buffering</strong></td>
+<td><strong>Latency (1080p30)</strong></td>
+</tr>
+<tr>
+<td>Capture Post-Processing<br />(e.g., Bayer filter, chroma resampling)</td>
+<td>A few lines (e.g. 8)</td>
+<td>&lt; 0.50ms</td>
+</tr>
+<tr>
+<td>Video Compression<br />(e.g. Motion-JPEG, MPEG-1/2/4 or H.264 with single-pass bitrate regulation)</td>
+<td>8 lines for conversion from raster scan<br />A few thousand pixels on the encoder pipeline</td>
+<td>0.25ms<br />&lt;&lt; 0.10ms</td>
+</tr>
+<tr>
+<td>Network Processing<br />(e.g. RTP/UDP/IP encapsulation)</td>
+<td>A few Kbytes</td>
+<td>&lt; 0.01ms</td>
+</tr>
+<tr>
+<td>Decoder Stream Buffer</td>
+<td>From a number of frames (e.g. more than 30) to<br />sub-frame (e.g. 1/2 frame)</td>
+<td>from 16ms<br />to 1sec</td>
+</tr>
+<tr>
+<td>Video Decompression<br />(JPEG, MPEG-1/2/4, or H.264)</td>
+<td>8 lines for conversion from raster scan<br />A few thousand of pixels on the decoder pipeline</td>
+<td>0.25ms<br />&lt;&lt; 0.10ms</td>
+</tr>
+<tr>
+<td>Display Pre-Processing<br />(e.g. Scaling, Chroma Resampling)</td>
+<td>A few lines (e.g. 8)</td>
+<td>&lt; 0.50ms</td>
+</tr>
+</tbody>
+</table>
+<p>As in most video-streaming applications, the dominant remaining latency contributor is the<span>&nbsp;</span><em>Decoder Stream Buffer</em><span>&nbsp;</span>(DSB). We&rsquo;ll next look at what this is, why we need one, and how we can we best reduce the latency it introduces.</p>
+<p><strong>DSB, the Dominant Latency Contributor</strong></p>
+<p>In our Table 1 example, we see the DSB may add from 1ms to 16ms of latency. This large range depends on the video stream&rsquo;s bit rate attributes. What attributes can we control to keep the DSB delay on the lower end of this range?</p>
+<p><strong>The Illusion of Constant Bit Rate</strong></p>
+<p>The bandwidth limitations of a streaming video system usually require regulation of the transmission bit rate. For example, a 720p30 video might need to be compressed for successful transmission over a channel that has a bit rate limited to 10 megabits per second (Mbps).</p>
+<p>One could reasonably assume that bit rate regulation yields a transmission bit rate that is constant at every point in time, e.g., every frame travels at the same 10Mbps. But this turns out not to be true, and that is why we need stream buffering for the decoder. Let&rsquo;s look closer at how this bit rate regulation works in video compression.</p>
+<p>Video compression reduces video data size by using fewer bits to represent the same video content. However, not all types of video content are equally receptive to compression. In a given frame, for example, the flat background parts of the image can be represented with many fewer bits than are necessary for the more detailed foreground parts. In a similar way, high motion sequences need many more bits than do those with moderate or no motion.</p>
+<p>As a result, compression natively produces streams of<span>&nbsp;</span><em>variable bit rate</em><span>&nbsp;</span>(VBR). With bit rate regulation (or bit-rate control), we force compression to produce the same amount of stream data over equal periods of time (e.g., for every 10 frames, or each 3 second interval). We call this<span>&nbsp;</span><em>constant bit rate</em><span>&nbsp;</span>(CBR) video. It comes at the expense of video quality, as we are in effect asking the compression engine to assign bits to content based on time rather than by image or sequence complexity as it really prefers to do.</p>
+<p>The<span>&nbsp;</span><em>averaging period</em><span>&nbsp;</span>used for defining the constant bit rate also has a major impact on video quality. For example, a stream with a CBR of &ldquo;10Mbps&rdquo; could have a size of 10Mbits every seconds, or 5Mbits every half a second, or 100Mbits every 10 seconds. It is further important to note that the bit rate fluctuates within this averaging period. For example, we might be averaging 50Mbps every 5 seconds, but this could mean 40Mbps in the first two seconds and 10Mbps in the remaining three seconds.</p>
+<p>Just as limiting the bit rate affects quality, limiting the averaging period also affects quality, with smaller averaging periods resulting in lower quality in the transmitted video.</p>
+<p><strong>Determining Decoder Stream Buffer Size</strong></p>
+<p><img alt="" src="https://www.design-reuse.com/news_img/20131007_video-streaming-bit-rate-graph-fig2-ck.png" width="480" longdesc="https://www.design-reuse.com/news_img/20131007_video-streaming-bit-rate-graph-fig2-ck.png" class="" /></p>
+<p><em>Figure 2: Example 10Mbps CBR stream, with an averaging period of 10 frames.</em></p>
+<p>Now we understand that a CBR stream actually fluctuates within the stream, and that both the transmission bit rate and the averaging period affect quality. This allows us to determine how big the DSB for a given system needs to be.</p>
+<p>First, appreciate that despite receiving data with a variable bit rate, the decoder will need to output data at a specific, really constant bit rate, as defined by the resolution and frame rate expected by the output display device (e.g., 1080p30).</p>
+<p>If the communication channel between the encoder and the decoder has no bandwidth limitations and can transmit the fluctuating bit rates, then the decoder can begin decoding as soon as it starts receiving the compressed data. In reality, though, the communication channel usually does have bandwidth limitations, e.g., 6Mbps for 802.11b WiFi, or the video stream may be able to use only a specific amount of the available bandwidth, as other traffic needs to go over the same channel. In these cases, the decoder would need to be fed data at rates that at times are higher or lower than the bit rate of the channel. Hence the need for the Decoder Stream Buffer.</p>
+<p>The DSB is responsible for bridging the communications rate mismatch and ensures that the decoder does not &ldquo;starve&rdquo; for incoming data, causing a playback interruption (recall the dreaded &ldquo;Buffering &hellip;&rdquo; message that sometimes appears when you&rsquo;re watching a NetFlix or YouTube video). The DSB achieves this by gathering and storing&mdash;buffering&mdash;enough incoming data until it can give the decoder enough data to process without any interruptions.</p>
+<p><img alt="Diagram showing video streaming through points in a
+ bandwidth-limited channel, with both variable and constant bit
+ rates (vbr and cbr)" src="https://www.design-reuse.com/news_img/20131007_video-latency-pipeline-fig3-ck.png" width="480" longdesc="https://www.design-reuse.com/news_img/20131007_video-latency-pipeline-fig3-ck.png" class="" /></p>
+<p><em>Figure 3: Video streaming over a bandwidth-limited channel, Constant and Variable Bit Rates at different points.</em></p>
+<p>The amount of buffering required depends on the bit rate and the averaging period of the stream. To make sure the decoder doesn&rsquo;t run out of data during playback, the DSB must store all the data corresponding to one complete averaging period. The averaging period&mdash;and therefore the latency related to the decoder&rsquo;s stream buffer&mdash;can range from a few tens of frames down to one whole frame, and in some cases, down to a fraction of a frame.</p>
+<p>Summarizing, because the DSB has the biggest impact on end-to-end latency and a CBR stream&rsquo;s averaging period determines the size of the DSB, it turns out that the averaging period is the most decisive factor in designing a low-latency system.</p>
+<p>But how do we control the CBR averaging period?</p>
+<p><strong>Decreasing Latency with the Right Video Encoder</strong></p>
+<p>We&rsquo;ve seen that while the size of the DSB greatly impacts latency, it&rsquo;s the rate control and averaging period definition occurring in the earlier video encoding phase that actually determine how much buffering will be required. Unfortunately, choosing the best encoding for a particular system is not easy.</p>
+<p>There are several encoding compression standards you may choose to use in a video system, including JPEG, JPEG2000, MPEG1/2/4, and H.264. You would think these standards would include a specification for handling rate control, but none of them do. This makes the choice between standards a rather challenging task, and requires that you carefully consider the specific encoder in the decision making process.</p>
+<p>The ability to control the bit rate and the averaging period with minimum impact on video quality is the main factor that sets the best video encoders above the rest. A review of the available video encoding IP cores reveals quite a range in capability. On the less-than-great end of the spectrum are encoders with no rate-control capabilities, encoders that have rate control but don&rsquo;t offer enough user control over it, and encoders that support low-latency encoding, but at very different levels of quality.</p>
+<p>Selecting the right encoder for a given application is a process involving video quality assessment and bit-rate analysis and is challenging even for expert video engineers. Non-experts (such as typical SoC or embedded system designers) should seek assistance from encoder vendors, who should be able to facilitate and guide you through such an evaluation process.</p>
+<p>Nevertheless, some key features can help you quickly separate efficient encoders from non-efficient ones, including<span>&nbsp;</span><em>Rate Control Granularity</em><span>&nbsp;</span>and<span>&nbsp;</span><em>Content-Adaptive Rate Control</em>.</p>
+<p><strong>Rate Control Granularity</strong></p>
+<p>The rate control process employs several sophisticated technical methods to modify the degree of compression to meet the target bit rate, such as quantization-level adjustment. Examining these methods is beyond the scope of this article, but a simple guideline can be applied: the more frequently the compression level is adjusted, the better the resulting compressed video will be in terms of both quality and rate control accuracy.</p>
+<p>This means, for example, that you can expect an encoder that does frame-based rate control (i.e., it regulates compression once every frame), to be less efficient than an encoder that makes rate control adjustments multiple times during each frame.</p>
+<p>So, when striving for low latency and quality, look for encoders with sub-frame rate control.</p>
+<p><strong>Content-Adaptive Rate Control</strong></p>
+<p>A single-pass rate control algorithm decides on the right level of compression change based on knowledge and a guess. The knowledge is the amount of video data already transmitted. The guess is a predictive estimate of the amount of data needed to compress the remaining video content within the averaging period.</p>
+<p>A smarter encoder can improve this estimate by trying to assess how difficult the remaining video content will be to compress, using statistics for the already compressed content and looking ahead at the content yet to be compressed. In general, these encoders with<span>&nbsp;</span><em>content-adaptive algorithms</em><span>&nbsp;</span>are more efficient, compared to content-unaware algorithms that only look at the previous data volumes.</p>
+<p>Look for a content-adaptive encoder when both low latency and quality matter.</p>
+<p><strong>Conclusions</strong></p>
+<p>We've seen that the need for data buffering increases video system latency, and that while this buffering occurs at the decoder (decompression) side, the factors influencing the amount of buffering necessary to meet transmission and quality goals are determined on the encoder (compression) side of the system.</p>
+<p>When designing a system to meet low-latency goals, keep these points in mind:</p>
+<ul>
+<li>Achieving low latency will require some trade off of decreased video quality or a higher transmission bit rate (or both).</li>
+<li>Identify your latency contributors throughout the system, and eliminate any unnecessary buffering. Focus on the granularity level (frame, level, pixel) that matters most in your system.</li>
+<li>Make selecting the best encoder a top priority, and, more specifically, evaluate each encoder&rsquo;s rate control features. Make sure the encoder provides the level of control over latency that your system requires. At a minimum, make sure that the encoder can support your target bit rate and the required averaging period.</li>
+</ul>
+<p>Considering key encoder features like these can help you quickly create a selection short list. But, more so than with other IP cores, effective selection of a video encoder requires careful evaluation of the actual video quality produced, in the context of the latency and bit rate requirements of your specific system. Be sure you&rsquo;re working with an IP vendor who is willing to help you understand the latency implications within your specific system, and who gives you a painless onsite evaluation process.</p>
+<p><strong>Consider the Video Compression Cores Available from CAST</strong></p>
+<p></p>
+<p>Designing effective video processing and display systems requires considerable technical expertise, making IP selection challenging for most digital designers. At CAST, we strive to help you better understand issues like low latency because we&rsquo;re confident you&rsquo;ll then choose the IP solutions we offer, if they&rsquo;re the best fit for your needs.</p>
+<p>We source these reusable IP cores from Alma Technologies. With an unmatched twelve years of experience, Alma Technologies is a world leader in the fields of sophisticated, high-performance video and still-image compression IP core solutions and provides them in high-quality, easy-to-use products ready for quick system integration.</p>
+<p>These cores cover all the popular industry standards used for video compression, and we offer variations and options for each to address the needs of most video applications (see Table 2, and visit<span>&nbsp;</span><a href="https://www.design-reuse.com/exit/?urlid=128">www.cast-inc.com/compression</a><span>&nbsp;</span>for more information). Reference design boards and evaluation kits give you the opportunity to try these compression cores with your own data in your own environment.</p>
+<p>Our sales and support teams have been helping customers choose and use compression IP cores since 2001, and they are ready to help you, too.</p>
+<table><caption><em>Table 2. Encoders available from CAST, with latency-related features.</em></caption>
+<tbody>
+<tr>
+<td><strong>Compression Standard</strong></td>
+<td><strong>Processing Buffering</strong></td>
+<td><strong>Averaging Period</strong></td>
+<td><strong>Rate Control Granularity</strong></td>
+<td><strong>Video<br />Quality</strong></td>
+<td><strong>End-to-End<br />Latency @60fps</strong></td>
+</tr>
+<tr>
+<td>JPEG</td>
+<td>8 - 16<br />pixel lines</td>
+<td>4 Frames<br />or higher</td>
+<td>Frame</td>
+<td>Very Good</td>
+<td>from 66ms</td>
+</tr>
+<tr>
+<td><a href="https://www.design-reuse.com/exit/?urlid=357">H.264 - Intra</a></td>
+<td>16<br />pixel lines</td>
+<td>1/8 Frame or higher</td>
+<td>Sub-Frame</td>
+<td>Excellent</td>
+<td>from 2ms</td>
+</tr>
+<tr>
+<td><a href="https://www.design-reuse.com/exit/?urlid=357">H.264</a></td>
+<td>16<br />pixel lines</td>
+<td>1/2 Frame<br />or higher</td>
+<td>Sub-Frame</td>
+<td>Excellent</td>
+<td>from 8ms</td>
+</tr>
+<tr>
+<td><a href="https://www.design-reuse.com/exit/?urlid=131">JPEG2000</a></td>
+<td>2 tiles/frames</td>
+<td>1 Tile/Frame</td>
+<td>Tile/Frame</td>
+<td>Excellent</td>
+<td>from 4ms</td>
+</tr>
+</tbody>
+</table>
+  </div>
+      
+    </div>
+    <div id="footer">
+      @ Chuan Pham &copy;  
+    </div>
+  </div>
+</body>
+</html>
