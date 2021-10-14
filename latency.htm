@@ -59,12 +59,35 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <ul>
-            <li><a href="sinr.htm">Calculate SINR</a></li>
-            <li><a href="latency.htm">Calculate Latency of video streaming</a></li>
-        </ul>
-
-      </div>
+        <div class="input">
+            <div class="inner_cell">
+            <div class="input_area" aria-label="Edit code here">
+            <div class="CodeMirror cm-s-ipython">
+            <div class="CodeMirror-scroll" draggable="false" tabindex="-1">
+            <h2><strong>Calculate the latency in the wireless link</strong></h2>
+            <div></div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="output_wrapper">
+            <div class="out_prompt_overlay prompt" title="click to scroll output; double click to hide">
+            <pre>data_rate=5*10**6 #bps<br /><br />#streaming frames sending per second<br />FPS=90 <br />#size of each frame<br />Frame_size=18768 #bits<br />#number of bits streaming per second<br />number_of_bit_per_sec=FPS*Frame_size<br />print("number of bits streaming per second:",number_of_bit_per_sec)<br />packet_size=1472 #bits<br />number_of_pac=np.ceil(number_of_bit_per_sec/packet_size)<br />print("number of packet:",number_of_pac)<br />#time to send a packet<br />time_per_pac=packet_size/data_rate<br />print("time to send a packet",time_per_pac)<br />#delay time<br />delay_time=time_per_pac*2*number_of_pac<br />print(delay_time)</pre>
+            </div>
+            <div class="output">
+            <div class="output_area">
+            <div class="prompt"></div>
+            <div class="output_subarea output_text output_stream output_stdout" dir="auto">
+            <pre>number of bits streaming per second: 1689120
+            number of packet: 1148.0
+            time to send a packet 0.0002944
+            0.6759424</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+  </div>
       
     </div>
     <div id="footer">
